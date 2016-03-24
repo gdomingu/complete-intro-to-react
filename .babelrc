@@ -1,0 +1,6 @@
+// This file is to configure babel which compiles js for older browsers
+{
+  "presets": ["react", "es2015"]
+}
+// for production only include the plugins that you need
+// These 'react and es2015' are what were installed with babel earlier.
