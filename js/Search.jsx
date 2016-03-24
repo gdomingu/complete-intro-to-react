@@ -6,11 +6,14 @@ const Search = () => (
   <div className='container'>
     <div className='shows'>
       {data.shows.map((show) => (
-        <ShowCard show={show} key={show.imdbID} />
+        <ShowCard {...show} key={show.imdbID} />
       ))}
     </div>
   </div>
 )
+
+// can do <ShowCard {...show} />
+// <ShowCard show={show} key={show.imdbID} />
 
 module.exports = Search
 // shows is data you want to show

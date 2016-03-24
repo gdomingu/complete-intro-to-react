@@ -5,8 +5,9 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const Landing = require('./Landing')
 const Search = require('./Search')
+const Layout = require('./Layout')
 const ReactRouter = require('react-router')
-const {Router, Route, hashHistory} = ReactRouter
+const {Router, Route, IndexRoute, hashHistory} = ReactRouter
 // Same as below
 // const Router = ReactRouter.Router
 // const Route = ReactRouter.Route
@@ -18,8 +19,10 @@ const {Router, Route, hashHistory} = ReactRouter
 const App = function () {
   return (
     <Router history={hashHistory}>
-      <Route path='/' component={Landing} />
-      <Route path='/search' component={Search} />
+      <Route path='/' component={Layout}>
+        <IndexRoute component={Landing} />
+        <Route path='/search' component={Search} />
+      </Route>
     </Router>
   )
 }
