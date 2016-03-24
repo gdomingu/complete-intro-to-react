@@ -3,19 +3,25 @@
 const React = require('react')
 // react corresponds to what npm installed
 const ReactDOM = require('react-dom')
+const Landing = require('./Landing')
+const ReactRouter = require('react-router')
+const {Router, Route, hashHistory} = ReactRouter
+// Same as below
+// const Router = ReactRouter.Router
+// const Route = ReactRouter.Route
+// Route path == url.
+// Route component == what to show when they get to that url
+// const hashHistory = ReactRouter.hashHistory
+// hash history keeps track of where to go with forward and back
 
 const App = function () {
   return (
-    <div className='app-container'>
-      <div className='home-info'>
-        <h1 className='title'>svideo</h1>
-        <input className='search' type='text' placeholder='Search' />
-        <button className='browse-all'> or browse all</button>
-      </div>
-    {/* comments */}
-    </div>
+    <Router history={hashHistory}>
+      <Route path='/' component={Landing} />
+    </Router>
   )
 }
+
 // must use / in closing tag in jsx
 // If it is Capitalized like MyTitle it is something I created.
 // A composit component.
