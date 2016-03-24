@@ -10,12 +10,18 @@ var MyTitleFactory = React.createFactory(MyTitle)
 // create factory is not used with JSX
 var ce = React.createElement
 // Create instance of class
-var MyFirstComponent = (
-  div(null,
-    MyTitleFactory({title: 'Props are great!', color: 'rebeccapurple'}),
-    React.createElement(MyTitle, {title: 'Use props everywhere', color: 'mediumaquamarine'}),
-    ce(MyTitle, {title: 'props are the best!', color: 'papayawhip'})
-    )
+var MyFirstComponent = function (){
+  return(
+    <div>
+      <MyTitle title='Whatever' color='rebeccapurple' />
+      <input />
+      <MyTitle title='LOL' color='dodgersblue' />
+      <MyTitle title='MOMOMOMOOO' color='#f06d06' />
+    </div>
   )
-ReactDOM.render(MyFirstComponent, document.getElementById('app'))
+}
+// must use / in closing tag in jsx
+// If it is Capitalized like MyTitle it is something I created.
+// A composit component.
+ReactDOM.render(<MyFirstComponent />, document.getElementById('app'))
 // ReactDOM is how you render it.
