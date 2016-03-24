@@ -1,22 +1,18 @@
 // Webpack is a build tool. Better to have local scopes, without polluting the global namespace.
 // His favorite is rollup.js
-var React = require('react')
+const React = require('react')
 // react corresponds to what npm installed
-var ReactDOM = require('react-dom')
-var MyTitle = require('./MyTitle')
-var div = React.DOM.div
+const ReactDOM = require('react-dom')
 
-var MyTitleFactory = React.createFactory(MyTitle)
-// create factory is not used with JSX
-var ce = React.createElement
-// Create instance of class
-var MyFirstComponent = function (){
+const App = function (){
   return(
-    <div>
-      <MyTitle title='Whatever' color='rebeccapurple' />
-      <input />
-      <MyTitle title='LOL' color='dodgersblue' />
-      <MyTitle title='MOMOMOMOOO' color='#f06d06' />
+    <div className='app-container'>
+      <div className='home-info'>
+        <h1 className='title'>svideo</h1>
+        <input className='search' type='text' placeholder='Search' />
+        <button className='browse-all'> or browse all</button>
+      </div>
+    {/* comments */}
     </div>
   )
 }
@@ -33,5 +29,5 @@ var MyFirstComponent = function (){
 //       <MyTitle title='MOMOMOMOOO' color='#f06d06' />
 //     </div>
 //  )
-ReactDOM.render(<MyFirstComponent />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
 // ReactDOM is how you render it.
