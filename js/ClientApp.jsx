@@ -4,8 +4,8 @@ const React = require('react')
 // react corresponds to what npm installed
 const ReactDOM = require('react-dom')
 
-const App = function (){
-  return(
+const App = function () {
+  return (
     <div className='app-container'>
       <div className='home-info'>
         <h1 className='title'>svideo</h1>
@@ -19,8 +19,7 @@ const App = function (){
 // must use / in closing tag in jsx
 // If it is Capitalized like MyTitle it is something I created.
 // A composit component.
-// can use 
-
+// Arrow syntax
 // var MyFirstComponent = () => (
 //     <div>
 //       <MyTitle title='Whatever' color='rebeccapurple' />
