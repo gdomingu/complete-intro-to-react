@@ -1,15 +1,17 @@
 const React = require('react')
 const { Link } = require('react-router')
 const { func, bool, string } = React.PropTypes
-
+const { connector } = require('./Store')
 const Header = React.createClass({
   propTypes: {
-    handleSearchTermChange: func,
+    setSearchTerm: func,
     showSearch: bool,
     searchTerm: string
   },
   handleSearchTermEvent (event) {
-    this.props.handleSearchTermChange(event.target.value)
+    // this.props.handleSearchTermChange(event.target.value)
+    this.props.setSearchTerm(event.target.value)
+    // this is coming from store.jsx
   },
   render () {
     let utilSpace
@@ -34,4 +36,9 @@ const Header = React.createClass({
   }
 })
 // {utilSpace} is a variable with already rendered jsx so you can just use it like that.
-module.exports = Header
+
+// check out elm
+module.exports = connector(Header)
+// wrap it in maptoState match to dispatch props
+// glue between react and redux.
+

@@ -10,6 +10,9 @@ const Details = require('./Details')
 const ReactRouter = require('react-router')
 const {Router, Route, IndexRoute, hashHistory} = ReactRouter
 const { shows } = require('../public/data')
+const { store } = require('./Store')
+const { Provider } = require('react-redux')
+
 // Same as below
 // const Router = ReactRouter.Router
 // const Route = ReactRouter.Route
@@ -36,15 +39,20 @@ const App = React.createClass({
     return nextState
   },
   // nextState is the show we are looking for
+  // anywhere you use the connector you can get store
+  // Where ever you ask for it.
+  // Just plug it in where you need it.
   render () {
     return (
-      <Router history={hashHistory}>
-        <Route path='/' component={Layout}>
-          <IndexRoute component={Landing} />
-          <Route path='/search' component={Search} shows={shows}/>
-          <Route path='/details/:id' component={Details} onEnter={this.assignShow} />
-        </Route>
-      </Router>
+      <Provider store={store}>
+        <Router history={hashHistory}>
+          <Route path='/' component={Layout}>
+            <IndexRoute component={Landing} />
+            <Route path='/search' component={Search} shows={shows}/>
+            <Route path='/details/:id' component={Details} onEnter={this.assignShow} />
+          </Route>
+        </Router>
+      </Provider>
     )
   }
 })
