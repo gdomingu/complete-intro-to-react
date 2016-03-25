@@ -15,7 +15,7 @@ const Header = React.createClass({
     let utilSpace
     // component we are going to use
     if (this.props.showSearch) {
-      utilSpace = <input value={this.state.searchTerm} className='search-input' type='text' placeholder='Search' onChange={this.handleSearchTermEvent} />
+      utilSpace = <input type='text' className='search-input' placeholder='search' value={this.props.searchTerm} onChange={this.handleSearchTermEvent} />
     } else {
       utilSpace = (
         <h2 className='header-back'>

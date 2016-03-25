@@ -17,7 +17,7 @@ const Search = React.createClass({
   // This is highly encouraged for future self
   // this shows up when first rendered
   handleSearchTermChange (searchTerm) {
-    this.setState({ searchTerm: searchTerm })
+    this.setState({ searchTerm })
   },
   // this will be called onChange
   // This is where you set this.state online 17.
