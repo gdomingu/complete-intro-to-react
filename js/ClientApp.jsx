@@ -6,6 +6,7 @@ const ReactDOM = require('react-dom')
 const Landing = require('./Landing')
 const Search = require('./Search')
 const Layout = require('./Layout')
+const Details = require('./Details')
 const ReactRouter = require('react-router')
 const {Router, Route, IndexRoute, hashHistory} = ReactRouter
 // Same as below
@@ -22,6 +23,7 @@ const App = function () {
       <Route path='/' component={Layout}>
         <IndexRoute component={Landing} />
         <Route path='/search' component={Search} />
+        <Route path='/details/:id' component={Details} />
       </Route>
     </Router>
   )
