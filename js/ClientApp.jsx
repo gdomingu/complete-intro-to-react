@@ -2,7 +2,6 @@
 // His favorite is rollup.js
 const React = require('react')
 // react corresponds to what npm installed
-const ReactDOM = require('react-dom')
 const Landing = require('./Landing')
 const Search = require('./Search')
 const Layout = require('./Layout')
@@ -22,7 +21,13 @@ const { Provider } = require('react-redux')
 // hash history keeps track of where to go with forward and back
 
 // stateless functional class vs react createClass
-
+const myRoutes = (props) => (
+  <Route path='/' component={Layout}>
+    <IndexRoute component={Landing} />
+    <Route path='/search' component={Search} />
+    <Route path='/details/:id' component={Details} />
+  </Route>
+)
 const App = React.createClass({
   // assignShow (nextState, replace) {
   //   // nextState are props that are getting passed down. In this case it is ID.
@@ -46,11 +51,7 @@ const App = React.createClass({
     return (
       <Provider store={store}>
         <Router history={hashHistory}>
-          <Route path='/' component={Layout}>
-            <IndexRoute component={Landing} />
-            <Route path='/search' component={Search}/>
-            <Route path='/details/:id' component={Details} />
-          </Route>
+          {myRoutes()}
         </Router>
       </Provider>
     )
@@ -69,5 +70,8 @@ const App = React.createClass({
 //       <MyTitle title='MOMOMOMOOO' color='#f06d06' />
 //     </div>
 //  )
-ReactDOM.render(<App />, document.getElementById('app'))
+
+App.Routes = myRoutes
+
+module.exports = App
 // ReactDOM is how you render it.
