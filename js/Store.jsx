@@ -1,9 +1,11 @@
 const redux = require('redux')
 const reactRedux = require('react-redux')
+const { shows } = require('../public/data')
 
 const SET_SEARCH_TERM = 'setSearchTerm'
 const initialState = {
-  searchTerm: ''
+  searchTerm: '',
+  shows
 }
 
 // making our first reducer
@@ -35,7 +37,11 @@ const store = redux.createStore(rootReducer, initialState, redux.compose(
 // this is the only call to redux. The rest is just javascript.
 
 const mapStateToProps = (state) => {
-  return { searchTerm: state.searchTerm }
+  return {
+    searchTerm: state.searchTerm,
+    shows: state.shows
+    // pass shows in with payload.
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

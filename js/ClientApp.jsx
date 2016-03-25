@@ -9,7 +9,7 @@ const Layout = require('./Layout')
 const Details = require('./Details')
 const ReactRouter = require('react-router')
 const {Router, Route, IndexRoute, hashHistory} = ReactRouter
-const { shows } = require('../public/data')
+// const { shows } = require('../public/data')
 const { store } = require('./Store')
 const { Provider } = require('react-redux')
 
@@ -24,20 +24,20 @@ const { Provider } = require('react-redux')
 // stateless functional class vs react createClass
 
 const App = React.createClass({
-  assignShow (nextState, replace) {
-    // nextState are props that are getting passed down. In this case it is ID.
-    // At the end of the method is is the showArray[0]
-    // replace is a method coming from react router
-    const showArray = shows.filter((show) => show.imdbID === nextState.params.id)
-    if (showArray.length < 1) {
-      return replace('/')
-      // if there is no show send them to hom page
-    }
+  // assignShow (nextState, replace) {
+  //   // nextState are props that are getting passed down. In this case it is ID.
+  //   // At the end of the method is is the showArray[0]
+  //   // replace is a method coming from react router
+  //   const showArray = shows.filter((show) => show.imdbID === nextState.params.id)
+  //   if (showArray.length < 1) {
+  //     return replace('/')
+  //     // if there is no show send them to hom page
+  //   }
 
-    Object.assign(nextState.params, showArray[0])
-    // All the properties in showArray into nextState.params
-    return nextState
-  },
+  //   Object.assign(nextState.params, showArray[0])
+  //   // All the properties in showArray into nextState.params
+  //   return nextState
+  // },
   // nextState is the show we are looking for
   // anywhere you use the connector you can get store
   // Where ever you ask for it.
@@ -48,8 +48,8 @@ const App = React.createClass({
         <Router history={hashHistory}>
           <Route path='/' component={Layout}>
             <IndexRoute component={Landing} />
-            <Route path='/search' component={Search} shows={shows}/>
-            <Route path='/details/:id' component={Details} onEnter={this.assignShow} />
+            <Route path='/search' component={Search}/>
+            <Route path='/details/:id' component={Details} />
           </Route>
         </Router>
       </Provider>

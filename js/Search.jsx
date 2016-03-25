@@ -3,7 +3,7 @@ const ShowCard = require('./ShowCard')
 // const data = require('../public/data')
 // now passing it in as a prop from client app
 const Header = require('./Header')
-const { object, string } = React.PropTypes
+const { object, string, arrayOf } = React.PropTypes
 const { connector } = require('./Store')
 
 const Search = React.createClass({
@@ -13,7 +13,7 @@ const Search = React.createClass({
   //   }
   // },
   propTypes: {
-    route: object,
+    route: arrayOf(object),
     searchTerm: string
   },
   // This is highly encouraged for future self

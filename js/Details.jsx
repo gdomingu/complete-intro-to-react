@@ -1,10 +1,21 @@
 const React = require('react')
 const Header = require('./Header')
+const { connector } = require('./Store')
 
 class Details extends React.Component {
+  assignShow (id) {
+    // nextState are props that are getting passed down. In this case it is ID.
+    // At the end of the method is is the showArray[0]
+    // replace is a method coming from react router
+    const showArray = this.props.shows.filter((show) => show.imdbID === id)
+    return showArray[0]
+  }
+  // nextState is the show we are looking for
+  // anywhere you use the connector you can get store
+  // Where ever you ask for it.
+  // Just plug it in where you need it.
   render () {
-    const params = this.props.params || {}
-    const { title, description, year, poster, trailer } = params
+    const { title, description, year, poster, trailer } = this.assignShow(this.props.params.id)
     return (
       <div className='container'>
         <Header />
@@ -22,10 +33,11 @@ class Details extends React.Component {
   }
 }
 
-const { object } = React.PropTypes
+const { arrayOf, object } = React.PropTypes
 
 Details.propTypes = {
-  params: object
+  params: object,
+  shows: arrayOf(object).isRequired
 }
 
 // usually put getInitialState first
@@ -43,4 +55,4 @@ Details.propTypes = {
 // </code>
 // </pre>
 
-module.exports = Details
+module.exports = connector(Details)
