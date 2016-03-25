@@ -2,12 +2,9 @@
 // His favorite is rollup.js
 const React = require('react')
 // react corresponds to what npm installed
-const Landing = require('./Landing')
-const Search = require('./Search')
 const Layout = require('./Layout')
-const Details = require('./Details')
 const ReactRouter = require('react-router')
-const {Router, Route, IndexRoute, hashHistory} = ReactRouter
+const {Router, browserHistory} = ReactRouter
 // const { shows } = require('../public/data')
 const { store } = require('./Store')
 const { Provider } = require('react-redux')
@@ -21,13 +18,48 @@ const { Provider } = require('react-redux')
 // hash history keeps track of where to go with forward and back
 
 // stateless functional class vs react createClass
-const myRoutes = (props) => (
-  <Route path='/' component={Layout}>
-    <IndexRoute component={Landing} />
-    <Route path='/search' component={Search} />
-    <Route path='/details/:id' component={Details} />
-  </Route>
-)
+// const myRoutes = (props) => (
+//   <Route path='/' component={Layout}>
+//     <IndexRoute component={Landing} />
+//     <Route path='/search' component={Search} />
+//     <Route path='/details/:id' component={Details} />
+//   </Route>
+// )
+if (typeof module !== 'undefined' && module.require) {
+  if (typeof require.ensure === 'undefined') {
+    require.ensure = require('node-ensure') // shim for node.js
+  }
+}
+
+const rootRoute = {
+  component: Layout,
+  path: '/',
+  indexRoute: {
+    getComponent (location, cb) {
+      require.ensure([], () => {
+        cb(null, require('./Landing'))
+      })
+    }
+  },
+  childRoutes: [
+    {
+      path: 'search',
+      getComponent (location, cb) {
+        require.ensure([], () => {
+          cb(null, require('./Search'))
+        })
+      }
+    },
+    {
+      path: 'details/:id',
+      getComponent (location, cb) {
+        require.ensure([], () => {
+          cb(null, require('./Details'))
+        })
+      }
+    }
+  ]
+}
 const App = React.createClass({
   // assignShow (nextState, replace) {
   //   // nextState are props that are getting passed down. In this case it is ID.
@@ -50,9 +82,7 @@ const App = React.createClass({
   render () {
     return (
       <Provider store={store}>
-        <Router history={hashHistory}>
-          {myRoutes()}
-        </Router>
+        <Router history={browserHistory} routes={rootRoute}/>
       </Provider>
     )
   }
@@ -71,7 +101,8 @@ const App = React.createClass({
 //     </div>
 //  )
 
-App.Routes = myRoutes
+App.Routes = rootRoute
+App.History = browserHistory
 
 module.exports = App
 // ReactDOM is how you render it.

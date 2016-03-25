@@ -13,7 +13,7 @@ const Search = React.createClass({
   //   }
   // },
   propTypes: {
-    route: arrayOf(object),
+    shows: arrayOf(object),
     searchTerm: string
   },
   // This is highly encouraged for future self
@@ -28,7 +28,7 @@ const Search = React.createClass({
       <div className='container'>
         <Header showSearch />
         <div className='shows'>
-          {this.props.route.shows
+          {this.props.shows
             .filter((show) => `${show.title} ${show.description}`.toUpperCase().indexOf(this.props.searchTerm.toUpperCase()) >= 0)
             .map((show) => (
               <ShowCard {...show} key={show.imdbID} />
